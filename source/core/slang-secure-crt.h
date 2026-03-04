@@ -1,6 +1,6 @@
-#ifndef _WIN32
 #ifndef SLANG_CORE_SECURE_CRT_H
 #define SLANG_CORE_SECURE_CRT_H
+#ifndef _WIN32
 #include <assert.h>
 #include <errno.h>
 #include <stdarg.h>
@@ -31,17 +31,6 @@ inline int fopen_s(FILE** f, const char* fileName, const char* mode)
         return errno;
     }
     return 0;
-}
-
-inline size_t fread_s(
-    void* buffer,
-    [[maybe_unused]] size_t bufferSize,
-    size_t elementSize,
-    size_t count,
-    FILE* stream)
-{
-    assert(bufferSize >= elementSize * count);
-    return fread(buffer, elementSize, count, stream);
 }
 
 inline size_t wcsnlen_s(const wchar_t* str, size_t /*numberofElements*/)
@@ -114,6 +103,18 @@ inline void strncpy_s(
     size_t count)
 {
     strncpy(strDestination, strSource, count);
+}
+#endif
+#if !defined(_WIN32) || defined(__MINGW32__)
+inline size_t fread_s(
+    void* buffer,
+    [[maybe_unused]] size_t bufferSize,
+    size_t elementSize,
+    size_t count,
+    FILE* stream)
+{
+    assert(bufferSize >= elementSize * count);
+    return fread(buffer, elementSize, count, stream);
 }
 #endif
 #endif
