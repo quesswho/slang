@@ -18,7 +18,7 @@ int WinMain(
 
 {
     FILE* logFile = fopen(g_logFileName, "w");
-#ifdef _MSVC_VER
+#ifdef _MSC_VER
     __try
     {
         int argc = 0;
@@ -29,7 +29,7 @@ int WinMain(
     {
         ::exit(1);
     }
-#else // defined(_MSC_VER)
+#else // _MSC_VER
     // TODO: Standard C++ try/catch only catches C++ exceptions, not hardware exceptions
     // such as access violations or stack overflows.
     try
