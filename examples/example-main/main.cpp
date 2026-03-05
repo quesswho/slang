@@ -5,7 +5,7 @@
 
 extern int exampleMain(int argc, char** argv);
 
-#if defined(_WIN32)
+#if defined(_MSC_VER)
 
 #include <windows.h>
 
@@ -21,7 +21,7 @@ int main(int argc, char** argv)
     }
 }
 
-#else // defined(_WIN32)
+#else // defined(_MSC_VER)
 
 int main(int argc, char** argv)
 {

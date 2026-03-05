@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <windows.h>
 
+#include <exception>
+
 extern int exampleMain(int argc, char** argv);
 extern const char* const g_logFileName;
 
@@ -16,6 +18,7 @@ int WinMain(
 
 {
     FILE* logFile = fopen(g_logFileName, "w");
+#ifdef _MSVC_VER
     __try
     {
         int argc = 0;
@@ -26,4 +29,23 @@ int WinMain(
     {
         ::exit(1);
     }
+#else // defined(_MSC_VER)
+    // TODO: Standard C++ try/catch only catches C++ exceptions, not hardware exceptions
+    // such as access violations or stack overflows.
+    try
+    {
+        int argc = 0;
+        char** argv = nullptr;
+        return exampleMain(argc, argv);
+    }
+    catch (const std::exception& e)
+    {
+        if (logFile)
+        {
+            fprintf(logFile, e.what());
+            fflush(logFile);
+        }
+        ::exit(1);
+    }
+#endif
 }

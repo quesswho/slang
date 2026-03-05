@@ -304,7 +304,7 @@ SLANG_COMPILE_TIME_ASSERT(E_OUTOFMEMORY == SLANG_E_OUT_OF_MEMORY);
     const UnownedStringSlice& name,
     StringBuilder& out)
 {
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(__MINGW32__)
     char* value = nullptr;
     size_t len = 0;
     errno_t err = _dupenv_s(&value, &len, String(name).getBuffer());

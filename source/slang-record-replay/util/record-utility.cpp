@@ -18,7 +18,7 @@ static thread_local unsigned int g_logLevel = LogLevel::Silent;
 
 static bool getEnvironmentVariable(const char* name, Slang::String& out)
 {
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(__MINGW32__)
     char* envVar = nullptr;
     size_t sz = 0;
     if (_dupenv_s(&envVar, &sz, name) == 0 && envVar != nullptr)
