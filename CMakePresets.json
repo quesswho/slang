@@ -101,6 +101,25 @@
       }
     },
     {
+      "name": "mingw",
+      "inherits": "default",
+      "description": "Build MinGW",
+      "cacheVariables": {
+        "SLANG_ENABLE_GFX": "OFF",
+        "SLANG_ENABLE_SLANG_RHI": "OFF",
+        "SLANG_ENABLE_TESTS": "OFF",
+        "SLANG_ENABLE_SLANGD": "OFF",
+        "SLANG_ENABLE_REPLAYER": "OFF",
+        "SLANG_SLANG_LLVM_FLAVOR": "DISABLE",
+        "SLANG_ENABLE_EXAMPLES": "OFF",
+        "SLANG_ENABLE_XLIB": "OFF",
+        "SLANG_ENABLE_CUDA": "OFF",
+        "SLANG_ENABLE_OPTIX": "OFF",
+        "SLANG_ENABLE_NVAPI": "OFF",
+        "SLANG_ENABLE_AFTERMATH": "OFF"
+      }
+    },
+    {
       "name": "generators",
       "inherits": "default",
       "description": "Build the compile time generators used in building Slang",
