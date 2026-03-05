@@ -345,7 +345,7 @@ set_target_properties(slang PROPERTIES
 # Windows proxy DLL for backward compatibility
 # Creates slang.dll that forwards all calls to slang-compiler.dll
 #
-if(WIN32 AND SLANG_LIB_TYPE STREQUAL "SHARED")
+if(WIN32 AND MSVC AND SLANG_LIB_TYPE STREQUAL "SHARED")
     # Create a minimal C++ source file (some linkers require at least one source)
     set(SLANG_PROXY_STUB_CPP "${CMAKE_CURRENT_BINARY_DIR}/slang-proxy-stub.cpp")
     file(WRITE "${SLANG_PROXY_STUB_CPP}" 
